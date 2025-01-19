@@ -52,7 +52,7 @@ function AttractionPage() {
           <p className="attraction__page-description-text">{data.description}</p>
         </div>
         <img
-          className="attraction__page-image"
+          className="attraction__page-image attraction__page-image-adapt"
           src={data.image}
           alt={data.name}
           width="650"

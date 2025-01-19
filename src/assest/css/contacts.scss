@@ -48,11 +48,37 @@
         }
         &-textarea{
             max-width: 600px;
-            min-width: 550px;
+            min-width: 300px;
             height: 168px;
             border-radius: 20px;
             padding: 20px;
             margin: 20px 0;
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .contacts {
+        &__wrap{
+            display: flex;
+            flex-direction: column;
+        }
+        &__image{
+            width:385px;
+            height: auto;
+        }
+        &__modal{
+            width: 385px;
+            &-input{
+                width: 300px;
+            }
+            &-textarea{
+                width: 300px;   
+                height: 168px;
+                border-radius: 20px;
+                padding: 20px;
+                margin: 20px 0;
+            }
         }
     }
 }

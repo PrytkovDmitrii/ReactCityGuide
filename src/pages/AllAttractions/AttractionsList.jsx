@@ -73,7 +73,7 @@ function AttractionsList() {
 
       <div className="attraction__wrap-sort">
         <div className="attraction__filter">
-          <label>Фильтровать по типу: </label>
+          <label className="attraction__filter-text">Фильтровать по типу: </label>
           <select
             className="attraction__filter-select"
             value={filterType}
@@ -87,7 +87,7 @@ function AttractionsList() {
         </div>
 
         <div className="attraction__sort">
-          <label>Сортировать по: </label>
+          <label className="attraction__filter-text">Сортировать по: </label>
           <select
             className="attraction__sort-select"
             value={sortBy}

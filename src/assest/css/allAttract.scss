@@ -5,7 +5,6 @@
       margin: 0 5px;
       padding: 5px 10px;
       border-radius: 10px;
-
     }
   }
   &__card {
@@ -145,3 +144,55 @@
   }
 }
     
+@media (max-width: 992px) {
+  .attraction{
+    &__sort,
+    &__filter{
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      &-text{
+        font-size: 16px;
+      }
+    }
+    &__card {
+      width: 375px; 
+      height: 300px;
+      &-img{
+        width: 345px;
+        height: 225px;
+      }
+      &-inner {
+        width: 375px; 
+        height: 300px;
+      }
+      &-back {
+        position: relative;
+        top: -300px;
+      }
+    }
+    &__page{
+      &-title{
+        font-size: 36px;
+        position: relative;
+        top: 40px;
+      }
+      &-wrapper{
+        display: flex;
+        flex-direction: column-reverse;
+      }
+      &-description{
+        &-title{
+          font-size: 28px;
+        }
+      }
+      &-image{
+        width: 375px;
+        height: auto;
+        &-adapt{
+          margin: 75px 0 -75px;
+        }
+      }
+    }
+  }
+}
