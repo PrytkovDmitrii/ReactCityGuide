@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import trash from '../../assest/image/reviews/trash.svg';
 import newStar from '../../assest/image/reviews/start.svg';
 import oldStar from '../../assest/image/reviews/startNoYelloy.svg';
@@ -57,5 +58,17 @@ function Reviews({ reviews, onDelete }) {
         </div>
     );
 }
+
+Reviews.propTypes = {
+    reviews: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired, 
+            star: PropTypes.number.isRequired,
+            review: PropTypes.string.isRequired,
+        })
+    ).isRequired, 
+    onDelete: PropTypes.func.isRequired, 
+};
 
 export default Reviews;

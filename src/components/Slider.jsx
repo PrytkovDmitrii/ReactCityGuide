@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const DataFetcher = () => {
-  const [data, setData] = useState([]);
+  const [setData] = useState([]);
   const [randomData, setRandomData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -56,6 +57,7 @@ const DataFetcher = () => {
 };
 
 const Slider = ({ data }) => {
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -108,5 +110,15 @@ const Slider = ({ data }) => {
     </div>
   );
 };
+
+Slider.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired, 
+      image: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired, 
+}
 
 export default DataFetcher;

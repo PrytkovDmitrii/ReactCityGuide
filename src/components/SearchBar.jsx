@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import "../assest/css/style.scss"
 
-function SearchBar({ data, onSearch }) {
+function SearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleInputChange = (e) => {
@@ -15,6 +16,10 @@ function SearchBar({ data, onSearch }) {
       <input className='search__input' type="text" placeholder="Поиск достопримечательностей..." value={searchTerm} onChange={handleInputChange}/>
     </div>
   );
+}
+
+SearchBar.propTypes = {
+  onSearch: PropTypes.func.isRequired
 }
 
 export default SearchBar;

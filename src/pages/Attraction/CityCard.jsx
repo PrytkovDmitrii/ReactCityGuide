@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import AttractionCard from "./AttractionCard";
+import PropTypes from "prop-types";
 
 function CityCard({ num }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [setError] = useState(null);
   const itemsPerPage = 5;
 
   const startIndex = Number(num);
@@ -40,6 +41,7 @@ function CityCard({ num }) {
     <div className="wrapper">
       {currentItems.map((item) => (
         <AttractionCard
+          key={item.pk}
           image={item.image}
           text={item.name}
           id={item.pk}
@@ -48,5 +50,9 @@ function CityCard({ num }) {
     </div>
   );
 }
+
+CityCard.propTypes = {
+  num: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // num может быть строкой или числом и обязательным
+};
 
 export default CityCard;

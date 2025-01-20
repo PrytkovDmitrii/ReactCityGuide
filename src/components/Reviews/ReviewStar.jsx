@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import newStar from '../../assest/image/reviews/start.svg';
 import oldStar from '../../assest/image/reviews/startNoYelloy.svg';
 
@@ -23,6 +24,10 @@ function StarRating({ onRatingChange }) {
       ))}
     </div>
   );
+}
+
+StarRating.propTypes = {
+  onRatingChange: PropTypes.func.isRequired,
 }
 
 export default StarRating;

@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-function HomeCard({title, text, href, image}) {
+function HomeCard({title, text, image}) {
     return (
         <div className="container_2">
             <div className="cardd">
@@ -20,6 +21,12 @@ function HomeCard({title, text, href, image}) {
             </div>
         </div>
     );
+}
+
+HomeCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
 }
 
 export default HomeCard;

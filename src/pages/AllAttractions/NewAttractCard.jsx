@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import PropTypes from "prop-types";
 import local from '../../assest/image/header/local.svg';
 
 function NewAttractCard({ image, title, text, address, id }) {
@@ -41,6 +42,14 @@ function NewAttractCard({ image, title, text, address, id }) {
       </button>
     </div>
   );
+}
+
+NewAttractCard.propTypes = {
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 }
 
 export default NewAttractCard;

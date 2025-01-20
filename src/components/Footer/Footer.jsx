@@ -13,7 +13,7 @@ function Footer() {
                     <div className="footer__logo">
                         <img src={logo} alt="logo" />
                     </div>
-                    <div class="footer__link">
+                    <div className="footer__link">
                         <a href="#" className="footer__link-t">
                             Главная
                         </a>
@@ -30,7 +30,7 @@ function Footer() {
                             FAQ
                         </a>
                     </div>
-                    <div class="footer__image">
+                    <div className="footer__image">
                         <a href="#">
                             <img className="footer__image-t" src={mailIcon} alt="mail-ru" />
                         </a>

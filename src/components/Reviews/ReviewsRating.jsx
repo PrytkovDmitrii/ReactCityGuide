@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import newStar from '../../assest/image/reviews/start.svg';
 
 function ReviewRating({ averageRating, totalReviews }) {
@@ -15,5 +16,10 @@ function ReviewRating({ averageRating, totalReviews }) {
         </div>
     );
 }
+
+ReviewRating.propTypes = {
+    averageRating: PropTypes.number.isRequired, 
+    totalReviews: PropTypes.number.isRequired, 
+};
 
 export default ReviewRating;
