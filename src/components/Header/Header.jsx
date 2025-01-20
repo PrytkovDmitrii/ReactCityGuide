@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // Импортируем useLocation
 import logo from '../../assest/image/logo.svg';
 import newspaperIcon from '../../assest/image/header/newspaper.svg';
 import attractIcon from '../../assest/image/header/attract.svg';
@@ -11,6 +12,12 @@ import HeaderLink from "./HeaderLink";
 function Header() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation(); 
+
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NewAttractCard from "./NewAttractCard";
-import SearchBar from "../../components/SearchBar"; 
+import SearchBar from "../../components/SearchBar";
 import magnifier from '../../assest/image/reviews/magnifier.svg';
 
 function AttractionsList() {
@@ -11,14 +11,14 @@ function AttractionsList() {
   const [itemsPerPage] = useState(8);
   const [sortBy, setSortBy] = useState("default");
   const [sortDirection, setSortDirection] = useState("desc");
-  const [searchTerm, setSearchTerm] = useState(""); 
-  const [filterType, setFilterType] = useState("all"); 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterType, setFilterType] = useState("all");
 
   useEffect(() => {
     fetch(`https://6735da235995834c8a945ad9.mockapi.io/api/List/`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data); 
+        console.log(data);
         setData(data);
         setLoading(false);
       })
@@ -29,16 +29,27 @@ function AttractionsList() {
       });
   }, []);
 
- 
-  const handleSearch = (term) => {
-    setSearchTerm(term);
-    setCurrentPage(1); 
+
+  const handleChange = (value, setStateFunction, resetPage = true) => {
+    setLoading(true);
+    setStateFunction(value);
+    if (resetPage) setCurrentPage(1); 
+    setTimeout(() => setLoading(false), 300); 
   };
 
 
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+    setCurrentPage(1);
+  };
+
+  const handleFilterChange = (e) => handleChange(e.target.value, setFilterType);
+  const handleSortChange = (e) => handleChange(e.target.value, setSortBy);
+  const handleSortDirectionChange = (e) => handleChange(e.target.value, setSortDirection);
+  const paginate = (pageNumber) => handleChange(pageNumber, setCurrentPage, false); 
+
   const filteredData = data
     .filter((item) => {
-     
       if (filterType !== "all") {
         return item.classSort === filterType;
       }
@@ -47,7 +58,6 @@ function AttractionsList() {
     .filter((item) => {
       return item.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
-
 
   const sortedData = [...filteredData].sort((a, b) => {
     if (sortBy === "popularity") {
@@ -60,15 +70,26 @@ function AttractionsList() {
     return 0;
   });
 
+  if (loading) {
+    return (
+      <div className="loader">
+        <div className="loader__row">
+          <div className="loader__item"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="error">Ошибка при загрузке данных: {error.message}</div>;
+  }
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = sortedData.slice(indexOfFirstItem, indexOfLastItem);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
   return (
     <div>
-
       <SearchBar data={data} onSearch={handleSearch} />
 
       <div className="attraction__wrap-sort">
@@ -77,7 +98,7 @@ function AttractionsList() {
           <select
             className="attraction__filter-select"
             value={filterType}
-            onChange={(e) => setFilterType(e.target.value)}
+            onChange={handleFilterChange} 
           >
             <option value="all">Все</option>
             <option value="temple">Храмы</option>
@@ -91,7 +112,7 @@ function AttractionsList() {
           <select
             className="attraction__sort-select"
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
+            onChange={handleSortChange} 
           >
             <option value="default">По умолчанию</option>
             <option value="popularity">По популярности</option>
@@ -101,7 +122,7 @@ function AttractionsList() {
             <select
               className="attraction__sort-select"
               value={sortDirection}
-              onChange={(e) => setSortDirection(e.target.value)}
+              onChange={handleSortDirectionChange} 
             >
               <option value="desc">По убыванию</option>
               <option value="asc">По возрастанию</option>
@@ -117,7 +138,6 @@ function AttractionsList() {
         </div>
       ) : (
         <>
-
           <div className="attraction__wrap">
             {currentItems.map((item) => (
               <NewAttractCard
@@ -131,7 +151,6 @@ function AttractionsList() {
             ))}
           </div>
 
-
           <div className="attraction__pagination">
             {Array.from(
               { length: Math.ceil(sortedData.length / itemsPerPage) },
@@ -139,7 +158,7 @@ function AttractionsList() {
                 <button
                   className="attraction__pagination-btn"
                   key={i + 1}
-                  onClick={() => paginate(i + 1)}
+                  onClick={() => paginate(i + 1)} 
                 >
                   {i + 1}
                 </button>

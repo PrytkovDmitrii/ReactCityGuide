@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import AttractionCard from "./AttractionCard";
 
 function CityCard({ num }) {
@@ -24,6 +23,16 @@ function CityCard({ num }) {
       });
   }, []);
 
+  if (loading) {
+    return (
+      <div className="loader">
+        <div className="loader__row">
+          <div className="loader__item"></div>
+
+        </div>
+      </div>
+    )
+  }
 
   const currentItems = data.slice(startIndex, startIndex + itemsPerPage);
 

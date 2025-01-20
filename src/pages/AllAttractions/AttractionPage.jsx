@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NotFound from '../NotFound';
 import Button from '../../components/Button';
-import Loader from '../../components/Loader';
 import ReviewForm from '../../components/Reviews/ReviewForm';
 
 function AttractionPage() {
@@ -31,8 +30,16 @@ function AttractionPage() {
   }, [id]); 
 
   if (loading) {
-    return <Loader />;
+    return (
+      <div className="loader">
+        <div className="loader__row">
+          <div className="loader__item"></div>
+
+        </div>
+      </div>
+    )
   }
+
 
   if (error) {
     return <NotFound />;

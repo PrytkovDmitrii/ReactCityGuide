@@ -33,7 +33,15 @@ const DataFetcher = () => {
   }, []);
 
   if (loading) {
-    return <div>Загрузка...</div>;
+    return (
+      <div className="loader">
+        <div className="loader__row">
+          <div className="loader__item"></div>
+
+        </div>
+      </div>
+    )
+    
   }
 
   if (error) {
