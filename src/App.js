@@ -1,16 +1,16 @@
-import React from 'react';
-import './App.css';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import React from "react";
+import "./App.css";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Attraction from "./pages/Attraction/Attraction";
 import Contacts from "./pages/Contacts/Contacts";
-import MapPage from './pages/Map/MapPage';
+import MapPage from "./pages/Map/MapPage";
 import NotFound from "./pages/NotFound";
-import AllAttractions from"./pages/AllAttractions/AllAttractions";
-import Loader from './components/Loader';
-import AttractionPage from './pages/AllAttractions/AttractionPage';
-import {Routes, Route } from 'react-router-dom';
+import AllAttractions from "./pages/AllAttractions/AllAttractions";
+import Loader from "./components/Loader";
+import AttractionPage from "./pages/AllAttractions/AttractionPage";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (

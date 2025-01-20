@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import NewAttractCard from "./NewAttractCard";
 import SearchBar from "../../components/SearchBar";
-import magnifier from '../../assest/image/reviews/magnifier.svg';
+import magnifier from "../../assest/image/reviews/magnifier.svg";
 
 function AttractionsList() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
   const [sortBy, setSortBy] = useState("default");
@@ -18,25 +18,20 @@ function AttractionsList() {
     fetch(`https://6735da235995834c8a945ad9.mockapi.io/api/List/`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setData(data);
         setLoading(false);
       })
-      .catch((error) => {
-        console.error("Ошибка при загрузке данных:", error);
-        setError(error);
+      .catch(() => {
         setLoading(false);
       });
   }, []);
 
-
   const handleChange = (value, setStateFunction, resetPage = true) => {
     setLoading(true);
     setStateFunction(value);
-    if (resetPage) setCurrentPage(1); 
-    setTimeout(() => setLoading(false), 300); 
+    if (resetPage) setCurrentPage(1);
+    setTimeout(() => setLoading(false), 300);
   };
-
 
   const handleSearch = (term) => {
     setSearchTerm(term);
@@ -45,8 +40,10 @@ function AttractionsList() {
 
   const handleFilterChange = (e) => handleChange(e.target.value, setFilterType);
   const handleSortChange = (e) => handleChange(e.target.value, setSortBy);
-  const handleSortDirectionChange = (e) => handleChange(e.target.value, setSortDirection);
-  const paginate = (pageNumber) => handleChange(pageNumber, setCurrentPage, false); 
+  const handleSortDirectionChange = (e) =>
+    handleChange(e.target.value, setSortDirection);
+  const paginate = (pageNumber) =>
+    handleChange(pageNumber, setCurrentPage, false);
 
   const filteredData = data
     .filter((item) => {
@@ -81,7 +78,9 @@ function AttractionsList() {
   }
 
   if (error) {
-    return <div className="error">Ошибка при загрузке данных: {error.message}</div>;
+    return (
+      <div className="error">Ошибка при загрузке данных: {error.message}</div>
+    );
   }
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -94,11 +93,13 @@ function AttractionsList() {
 
       <div className="attraction__wrap-sort">
         <div className="attraction__filter">
-          <label className="attraction__filter-text">Фильтровать по типу: </label>
+          <label className="attraction__filter-text">
+            Фильтровать по типу:{" "}
+          </label>
           <select
             className="attraction__filter-select"
             value={filterType}
-            onChange={handleFilterChange} 
+            onChange={handleFilterChange}
           >
             <option value="all">Все</option>
             <option value="temple">Храмы</option>
@@ -112,7 +113,7 @@ function AttractionsList() {
           <select
             className="attraction__sort-select"
             value={sortBy}
-            onChange={handleSortChange} 
+            onChange={handleSortChange}
           >
             <option value="default">По умолчанию</option>
             <option value="popularity">По популярности</option>
@@ -122,7 +123,7 @@ function AttractionsList() {
             <select
               className="attraction__sort-select"
               value={sortDirection}
-              onChange={handleSortDirectionChange} 
+              onChange={handleSortDirectionChange}
             >
               <option value="desc">По убыванию</option>
               <option value="asc">По возрастанию</option>
@@ -158,11 +159,11 @@ function AttractionsList() {
                 <button
                   className="attraction__pagination-btn"
                   key={i + 1}
-                  onClick={() => paginate(i + 1)} 
+                  onClick={() => paginate(i + 1)}
                 >
                   {i + 1}
                 </button>
-              )
+              ),
             )}
           </div>
         </>

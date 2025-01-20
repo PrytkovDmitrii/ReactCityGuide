@@ -7,17 +7,14 @@ function Loader() {
   const location = useLocation();
 
   useEffect(() => {
-    
     setIsLoading(true);
 
-    
     const timeout = setTimeout(() => {
       setIsLoading(false);
     }, 500);
 
-    
     return () => clearTimeout(timeout);
-  }, [location]); 
+  }, [location]);
 
   if (!isLoading) return null;
 
@@ -25,7 +22,6 @@ function Loader() {
     <div className="loader">
       <div className="loader__row">
         <div className="loader__item"></div>
-
       </div>
     </div>
   );

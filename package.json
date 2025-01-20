@@ -12,24 +12,12 @@
     "sass": "^1.83.1"
   },
   "scripts": {
-    "lint": "eslint src/**/*.{js,jsx}",
+    "lint": "eslint src/**/*.{js,jsx} --fix",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
-    },
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "plugin:react/recommended",
-      "./eslint.config.js"
-    ]
+    "eject": "react-scripts eject",
+    "format": "prettier --write ."
   },
   "browserslist": {
     "production": [
@@ -45,8 +33,11 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
-    "eslint": "^8.57.1",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-unused-imports": "^4.1.4",
     "globals": "^15.14.0",
     "prettier": "^3.4.2"
   }

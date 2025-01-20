@@ -1,30 +1,35 @@
 import React, { useState } from "react";
-import '../../assest/css/contacts.scss';
-import contactImage from '../../assest/image/contacts/contactImage.png';
+import "../../assest/css/contacts.scss";
+import contactImage from "../../assest/image/contacts/contactImage.png";
 import Modal from "../../components/Modal";
 import ContactForm from "./ContactForm";
 
 function Contacts() {
-  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
-    setIsModalOpen(true); 
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); 
+    setIsModalOpen(false);
   };
 
   return (
     <div className="container">
       <div className="contacts__wrap">
         <div className="contacts__left">
-          <img className="contacts__image" src={contactImage} alt="Контакты картинка🥺" />
+          <img
+            className="contacts__image"
+            src={contactImage}
+            alt="Контакты картинка🥺"
+          />
         </div>
         <div className="contacts__right">
           <h1 className="contacts__title">Свяжитесь с нами</h1>
           <p className="contacts__text">
-            Мы всегда рады помочь вам с вопросами, предложениями и отзывами. Не стесняйтесь обращаться!
+            Мы всегда рады помочь вам с вопросами, предложениями и отзывами. Не
+            стесняйтесь обращаться!
           </p>
           <div className="contacts__line"></div>
           <div className="contacts__wrap-mini">
@@ -41,7 +46,7 @@ function Contacts() {
             Связаться с нами
           </button>
           <Modal isOpen={isModalOpen} onClose={closeModal}>
-                <ContactForm />
+            <ContactForm />
           </Modal>
         </div>
       </div>

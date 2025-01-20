@@ -18,7 +18,6 @@ function CityCard({ num }) {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Ошибка при загрузке данных:", error);
         setError(error);
         setLoading(false);
       });
@@ -29,10 +28,9 @@ function CityCard({ num }) {
       <div className="loader">
         <div className="loader__row">
           <div className="loader__item"></div>
-
         </div>
       </div>
-    )
+    );
   }
 
   const currentItems = data.slice(startIndex, startIndex + itemsPerPage);

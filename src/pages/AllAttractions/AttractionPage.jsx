@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import NotFound from '../NotFound';
-import Button from '../../components/Button';
-import ReviewForm from '../../components/Reviews/ReviewForm';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import NotFound from "../NotFound";
+import Button from "../../components/Button";
+import ReviewForm from "../../components/Reviews/ReviewForm";
 
 function AttractionPage() {
   const [data, setData] = useState(null);
@@ -14,7 +14,7 @@ function AttractionPage() {
     fetch(`https://6735da235995834c8a945ad9.mockapi.io/api/Attractions/${id}`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Достопримечательность не найдена');
+          throw new Error("Достопримечательность не найдена");
         }
         return response.json();
       })
@@ -23,23 +23,20 @@ function AttractionPage() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Ошибка при загрузке данных:', error);
         setError(error);
         setLoading(false);
       });
-  }, [id]); 
+  }, [id]);
 
   if (loading) {
     return (
       <div className="loader">
         <div className="loader__row">
           <div className="loader__item"></div>
-
         </div>
       </div>
-    )
+    );
   }
-
 
   if (error) {
     return <NotFound />;
@@ -51,12 +48,16 @@ function AttractionPage() {
 
   return (
     <div className="container">
-      <Button text='⬅ Вернуться назад' href='/../all-attract/' />
+      <Button text="⬅ Вернуться назад" href="/../all-attract/" />
       <h1 className="attraction__page-title">{data.name}</h1>
       <div className="attraction__page-wrapper">
         <div className="attraction__page-description">
-          <h3 className="attraction__page-description-title animate-right">{data.title}</h3>
-          <p className="attraction__page-description-text">{data.description}</p>
+          <h3 className="attraction__page-description-title animate-right">
+            {data.title}
+          </h3>
+          <p className="attraction__page-description-text">
+            {data.description}
+          </p>
         </div>
         <img
           className="attraction__page-image attraction__page-image-adapt"
@@ -75,8 +76,12 @@ function AttractionPage() {
           height="500"
         />
         <div className="attraction__page-description">
-          <h3 className="attraction__page-description-title animate-left">{data.titleTwo}</h3>
-          <p className="attraction__page-description-text">{data.descriptionTwo}</p>
+          <h3 className="attraction__page-description-title animate-left">
+            {data.titleTwo}
+          </h3>
+          <p className="attraction__page-description-text">
+            {data.descriptionTwo}
+          </p>
         </div>
       </div>
       <h1 className="attraction__page-map-title">{data.name} на карте</h1>
@@ -94,7 +99,9 @@ function AttractionPage() {
       <h1 className="attraction__page-info-title">Дополнительная информация</h1>
       <div className="attraction__page-info">
         <p className="attraction__page-info-text">Адрес: {data.address}</p>
-        <p className="attraction__page-info-text">Время работы: {data.openHours}</p>
+        <p className="attraction__page-info-text">
+          Время работы: {data.openHours}
+        </p>
       </div>
       <ReviewForm />
     </div>

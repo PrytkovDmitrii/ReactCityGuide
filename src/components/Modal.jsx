@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import '../assest/css/style.scss'
+import "../assest/css/style.scss";
 
 function Modal({ isOpen, onClose, children }) {
-  if (!isOpen) return null; 
+  if (!isOpen) return null;
 
   return (
     <div className="modal__overlay">
@@ -21,6 +21,6 @@ Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
-}
+};
 
 export default Modal;
