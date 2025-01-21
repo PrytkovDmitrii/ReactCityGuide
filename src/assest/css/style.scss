@@ -217,6 +217,11 @@ body.black {
       }
     }
   }
+  .attractions {
+    &__wrap::before {
+      border: 3px solid #ff814b;
+    }
+  }
   @media (max-width: 992px) {
     .search__input {
       width: 300px;
@@ -673,8 +678,8 @@ html {
     cursor: pointer;
     border-radius: 50%;
     font-size: 18px;
-    z-index: 10; // Чтобы кнопки были поверх слайдов
-    transition: background-color 0.3s ease-in-out; // Плавное изменение цвета кнопок
+    z-index: 10;
+    transition: background-color 0.3s ease-in-out;
 
     &.prev {
       left: 10px;

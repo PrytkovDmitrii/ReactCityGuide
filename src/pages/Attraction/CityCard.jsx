@@ -50,7 +50,7 @@ function CityCard({ num }) {
 }
 
 CityCard.propTypes = {
-  num: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // num может быть строкой или числом и обязательным
+  num: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 export default CityCard;

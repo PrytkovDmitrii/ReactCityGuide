@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom"; // Импортируем useLocation
+import { useLocation } from "react-router-dom";
 import logo from "../../assest/image/logo.svg";
 import newspaperIcon from "../../assest/image/header/newspaper.svg";
 import attractIcon from "../../assest/image/header/attract.svg";

@@ -58,22 +58,22 @@ function AttractionsList() {
 
   const handleSearch = (term) => {
     setSearchTerm(term);
-    setCurrentPage(1); // Сброс пагинации при поиске
+    setCurrentPage(1);
   };
 
   const handleFilterChange = (e) => {
     setFilterType(e.target.value);
-    setCurrentPage(1); // Сброс пагинации при изменении фильтра
+    setCurrentPage(1);
   };
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
-    setCurrentPage(1); // Сброс пагинации при изменении сортировки
+    setCurrentPage(1);
   };
 
   const handleSortDirectionChange = (e) => {
     setSortDirection(e.target.value);
-    setCurrentPage(1); // Сброс пагинации при изменении направления сортировки
+    setCurrentPage(1);
   };
 
   if (isLoading && !searchTerm) {

@@ -8,6 +8,27 @@ a {
 }
 
 .attractions {
+  &__wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 75px;
+    position: relative;
+  }
+
+  &__wrap::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #7b61ff;
+    border-radius: 50%;
+    transform: rotateZ(-7deg);
+    z-index: 1;
+  }
   &__texts {
     display: flex;
     justify-content: space-between;
@@ -48,6 +69,14 @@ a {
     font-size: 32px;
     text-align: center;
     margin: 0 0 30px;
+    &-text {
+      z-index: 2;
+      font-size: 38px;
+      width: 750px;
+    }
+    &-image {
+      scale: 1.25;
+    }
     &-first {
       font-size: 42px;
       width: 700px;
@@ -89,7 +118,7 @@ a {
 }
 
 .card:hover {
-  flex: 2 1 400px; /* Увеличиваем карточку при наведении */
+  flex: 2 1 400px;
 }
 
 .card:hover .attractions__text2 {
@@ -102,7 +131,7 @@ a {
     height: 100px;
   }
   .card:hover {
-    flex: 2 1 105px; /* Увеличиваем карточку при наведении */
+    flex: 2 1 105px;
   }
   .attractions {
     &__image img {
