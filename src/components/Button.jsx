@@ -5,7 +5,11 @@ import { Link } from "react-router-dom";
 
 function Button({ text, href, style }) {
   return (
-    <div className="main__btn" style={style}>
+    <div
+      className="main__btn"
+      style={style}
+      onClick={() => window.scrollTo(0, 0)}
+    >
       <Link to={href} className="main__btn-t">
         {text}
       </Link>

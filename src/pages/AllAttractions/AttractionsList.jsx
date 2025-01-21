@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import NewAttractCard from "./NewAttractCard";
 import SearchBar from "../../components/SearchBar";
 import magnifier from "../../assest/image/reviews/magnifier.svg";
 
 function AttractionsList() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
   const [sortBy, setSortBy] = useState("default");
@@ -14,60 +12,71 @@ function AttractionsList() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("all");
 
-  useEffect(() => {
-    fetch(`https://6735da235995834c8a945ad9.mockapi.io/api/List/`)
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
-  }, []);
+  const fetchAttractions = async ({ queryKey }) => {
+    const [, { filterType, sortBy, sortDirection, searchTerm }] = queryKey;
 
-  const handleChange = (value, setStateFunction, resetPage = true) => {
-    setLoading(true);
-    setStateFunction(value);
-    if (resetPage) setCurrentPage(1);
-    setTimeout(() => setLoading(false), 300);
+    const url = new URL(
+      `https://6735da235995834c8a945ad9.mockapi.io/api/List/`,
+    );
+
+    if (filterType && filterType !== "all") {
+      url.searchParams.append("classSort", filterType);
+    }
+    if (sortBy === "popularity") {
+      url.searchParams.append("sortBy", "pop");
+      url.searchParams.append("order", sortDirection);
+    }
+    if (searchTerm) {
+      url.searchParams.append("name", searchTerm);
+    }
+
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Ошибка при загрузке данных");
+    }
+
+    return response.json();
   };
+
+  const {
+    data: attractions = [],
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: [
+      "attractions",
+      { filterType, sortBy, sortDirection, searchTerm },
+    ],
+    queryFn: fetchAttractions,
+  });
+
+  // Клиентская пагинация
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = attractions.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(attractions.length / itemsPerPage);
 
   const handleSearch = (term) => {
     setSearchTerm(term);
-    setCurrentPage(1);
+    setCurrentPage(1); // Сброс пагинации при поиске
   };
 
-  const handleFilterChange = (e) => handleChange(e.target.value, setFilterType);
-  const handleSortChange = (e) => handleChange(e.target.value, setSortBy);
-  const handleSortDirectionChange = (e) =>
-    handleChange(e.target.value, setSortDirection);
-  const paginate = (pageNumber) =>
-    handleChange(pageNumber, setCurrentPage, false);
+  const handleFilterChange = (e) => {
+    setFilterType(e.target.value);
+    setCurrentPage(1); // Сброс пагинации при изменении фильтра
+  };
 
-  const filteredData = data
-    .filter((item) => {
-      if (filterType !== "all") {
-        return item.classSort === filterType;
-      }
-      return true;
-    })
-    .filter((item) => {
-      return item.name.toLowerCase().includes(searchTerm.toLowerCase());
-    });
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+    setCurrentPage(1); // Сброс пагинации при изменении сортировки
+  };
 
-  const sortedData = [...filteredData].sort((a, b) => {
-    if (sortBy === "popularity") {
-      if (sortDirection === "desc") {
-        return b.pop - a.pop;
-      } else {
-        return a.pop - b.pop;
-      }
-    }
-    return 0;
-  });
+  const handleSortDirectionChange = (e) => {
+    setSortDirection(e.target.value);
+    setCurrentPage(1); // Сброс пагинации при изменении направления сортировки
+  };
 
-  if (loading) {
+  if (isLoading && !searchTerm) {
     return (
       <div className="loader">
         <div className="loader__row">
@@ -83,13 +92,9 @@ function AttractionsList() {
     );
   }
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = sortedData.slice(indexOfFirstItem, indexOfLastItem);
-
   return (
     <div>
-      <SearchBar data={data} onSearch={handleSearch} />
+      <SearchBar data={attractions} onSearch={handleSearch} />
 
       <div className="attraction__wrap-sort">
         <div className="attraction__filter">
@@ -132,7 +137,7 @@ function AttractionsList() {
         </div>
       </div>
 
-      {filteredData.length === 0 ? (
+      {currentItems.length === 0 ? (
         <div className="search__none">
           <h2 className="search__none-text">Тут пока что ничего нет...</h2>
           <img className="search__none-img" src={magnifier} alt="лупа" />
@@ -153,18 +158,18 @@ function AttractionsList() {
           </div>
 
           <div className="attraction__pagination">
-            {Array.from(
-              { length: Math.ceil(sortedData.length / itemsPerPage) },
-              (_, i) => (
-                <button
-                  className="attraction__pagination-btn"
-                  key={i + 1}
-                  onClick={() => paginate(i + 1)}
-                >
-                  {i + 1}
-                </button>
-              ),
-            )}
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                className="attraction__pagination-btn"
+                key={i + 1}
+                onClick={() => {
+                  setCurrentPage(i + 1);
+                  window.scrollTo(0, 0);
+                }}
+              >
+                {i + 1}
+              </button>
+            ))}
           </div>
         </>
       )}

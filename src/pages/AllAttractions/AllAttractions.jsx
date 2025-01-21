@@ -1,11 +1,16 @@
 import React from "react";
-import "../../assest/css/allAttract.scss";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AttractionsList from "./AttractionsList";
+import "../../assest/css/allAttract.scss";
+
+const queryClient = new QueryClient();
 
 function AllAttractions() {
   return (
     <div className="container">
-      <AttractionsList />
+      <QueryClientProvider client={queryClient}>
+        <AttractionsList />
+      </QueryClientProvider>
     </div>
   );
 }

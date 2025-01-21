@@ -10,7 +10,11 @@ function HomeCard({ title, text, image }) {
         <p className="cardd__text">
           {text}
           <br />
-          <Link to="/maps" className="cardd__map">
+          <Link
+            to="/maps"
+            className="cardd__map"
+            onClick={() => window.scrollTo(0, 0)}
+          >
             Посмотреть на карте
           </Link>
         </p>
