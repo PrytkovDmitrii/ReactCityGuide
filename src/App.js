@@ -18,12 +18,18 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/attract" element={<Attraction />} />
-          <Route path="/all-attract" element={<AllAttractions />} />
-          <Route path="/all-attract/:id" element={<AttractionPage />} />
-          <Route path="/contacts" element={<Contacts />} />
-          <Route path="/maps" element={<MapPage />} />
+          <Route path="ReactCityGuide/" element={<Home />} />
+          <Route path="ReactCityGuide/attract" element={<Attraction />} />
+          <Route
+            path="ReactCityGuide/all-attract"
+            element={<AllAttractions />}
+          />
+          <Route
+            path="ReactCityGuide/all-attract/:id"
+            element={<AttractionPage />}
+          />
+          <Route path="ReactCityGuide/contacts" element={<Contacts />} />
+          <Route path="ReactCityGuide/maps" element={<MapPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
