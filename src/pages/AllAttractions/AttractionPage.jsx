@@ -8,6 +8,8 @@ function AttractionPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { id } = useParams();
 
   useEffect(() => {
@@ -19,6 +21,7 @@ function AttractionPage() {
         return response.json();
       })
       .then((data) => {
+        data.images = [data.image, data.imageTwo];
         setData(data);
         setLoading(false);
       })
@@ -27,6 +30,28 @@ function AttractionPage() {
         setLoading(false);
       });
   }, [id]);
+
+  const openModal = (index) => {
+    setCurrentImageIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setCurrentImageIndex(0);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? data.images.length - 1 : prevIndex - 1,
+    );
+  };
+
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === data.images.length - 1 ? 0 : prevIndex + 1,
+    );
+  };
 
   if (loading) {
     return (
@@ -43,7 +68,7 @@ function AttractionPage() {
   }
 
   if (!data) {
-    return <div>Данные не загружены</div>;
+    return <div>Данные не загружены😭</div>;
   }
 
   return (
@@ -65,6 +90,7 @@ function AttractionPage() {
           alt={data.name}
           width="650"
           height="450"
+          onClick={() => openModal(0)}
         />
       </div>
       <div className="attraction__page-wrapper">
@@ -74,6 +100,7 @@ function AttractionPage() {
           alt={data.name}
           width="auto"
           height="500"
+          onClick={() => openModal(1)}
         />
         <div className="attraction__page-description">
           <h3 className="attraction__page-description-title animate-left">
@@ -104,6 +131,26 @@ function AttractionPage() {
         </p>
       </div>
       <ReviewForm />
+
+      {isModalOpen && (
+        <div className="attraction__page-modal-overlay" onClick={closeModal}>
+          <div
+            className="attraction__page-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={data.images[currentImageIndex]}
+              alt="Увеличенное изображение"
+            />
+            <button className="attraction__page-modal-prev" onClick={prevImage}>
+              &#10094;
+            </button>
+            <button className="attraction__page-modal-next" onClick={nextImage}>
+              &#10095;
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

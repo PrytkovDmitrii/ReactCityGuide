@@ -49,6 +49,9 @@ textarea {
 // BLACK MODE
 
 body.black {
+  textarea {
+    background: #2c2c2c;
+  }
   input {
     background: #2c2c2c;
     color: #fff;
@@ -156,6 +159,13 @@ body.black {
     }
   }
   .attraction {
+    &__page {
+      &-modal {
+        &-content {
+          background-color: #4b4b4b;
+        }
+      }
+    }
     &__card {
       &-front {
         background-color: #4b4b4b;
@@ -220,6 +230,7 @@ body.black {
   .attractions {
     &__wrap::before {
       border: 3px solid #ff814b;
+      box-shadow: 5px 10px 50px #ff814b;
     }
   }
   @media (max-width: 992px) {
