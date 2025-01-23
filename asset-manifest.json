@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ReactCityGuide/static/css/main.5b99940a.css",
-    "main.js": "/ReactCityGuide/static/js/main.8aa6061d.js",
+    "main.js": "/ReactCityGuide/static/js/main.86b42a9d.js",
     "static/js/563.1f5e6b17.chunk.js": "/ReactCityGuide/static/js/563.1f5e6b17.chunk.js",
     "static/media/contactImage.png": "/ReactCityGuide/static/media/contactImage.fcba71cc104726e3c5ee.png",
     "static/media/moscow.png": "/ReactCityGuide/static/media/moscow.e2ec256a6c4b85bb07bd.png",
@@ -23,11 +23,11 @@
     "static/media/startNoYelloy.svg": "/ReactCityGuide/static/media/startNoYelloy.305d39f73fe6dc4eec4d8e43d3748f40.svg",
     "index.html": "/ReactCityGuide/index.html",
     "main.5b99940a.css.map": "/ReactCityGuide/static/css/main.5b99940a.css.map",
-    "main.8aa6061d.js.map": "/ReactCityGuide/static/js/main.8aa6061d.js.map",
+    "main.86b42a9d.js.map": "/ReactCityGuide/static/js/main.86b42a9d.js.map",
     "563.1f5e6b17.chunk.js.map": "/ReactCityGuide/static/js/563.1f5e6b17.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5b99940a.css",
-    "static/js/main.8aa6061d.js"
+    "static/js/main.86b42a9d.js"
   ]
 }
