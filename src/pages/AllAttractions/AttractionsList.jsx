@@ -4,9 +4,11 @@ import NewAttractCard from "./NewAttractCard";
 import SearchBar from "../../components/SearchBar";
 import magnifier from "../../assest/image/reviews/magnifier.svg";
 
+// import styles from  './asdasd.module.scss'
+
 function AttractionsList() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(8);
+  const [itemsPerPage] = useState(12);
   const [sortBy, setSortBy] = useState("default");
   const [sortDirection, setSortDirection] = useState("desc");
   const [searchTerm, setSearchTerm] = useState("");
@@ -50,7 +52,6 @@ function AttractionsList() {
     queryFn: fetchAttractions,
   });
 
-  // Клиентская пагинация
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = attractions.slice(indexOfFirstItem, indexOfLastItem);
