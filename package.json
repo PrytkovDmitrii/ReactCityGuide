@@ -1,6 +1,6 @@
 {
   "name": "react-city-guide",
-  "homepage": "https://github.com/PrytkovDmitrii/ReactCityGuide.git",
+  "homepage": "https://github.com/PrytkovDmitrii/ReactCityGuide",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
